@@ -237,8 +237,18 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       border: 1px solid rgba(45, 106, 79, 0.14);
-      padding: 20px 20px 22px;
+      padding: 20px 20px 14px;
       margin-bottom: 14px;
+    }
+
+    .fibra-sgr {
+      grid-column: 1 / -1;
+      margin: 2px 0 0;
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: #b8c4be;
+      line-height: 1.35;
+      text-align: right;
     }
 
     @media (max-width: 640px) {
@@ -323,12 +333,25 @@
     .fibra-plaques {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "ag lf"
+        "ref ref";
       gap: 14px;
       margin-bottom: 14px;
     }
 
+    .fibra-plaque--ag { grid-area: ag; }
+    .fibra-plaque--lf { grid-area: lf; }
+    .fibra-ref { grid-area: ref; }
+
     @media (max-width: 720px) {
-      .fibra-plaques { grid-template-columns: 1fr; }
+      .fibra-plaques {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "ag"
+          "ref"
+          "lf";
+      }
     }
 
     .fibra-plaque {
@@ -338,6 +361,8 @@
       padding: 18px 18px 16px 20px;
       border-left: 5px solid rgba(26, 77, 68, 0.92);
       box-shadow: 0 6px 18px rgba(16, 42, 31, 0.07);
+      height: 100%;
+      box-sizing: border-box;
     }
 
     .fibra-plaque h2 {
@@ -356,6 +381,38 @@
     }
 
     .fibra-plaque p:last-child { margin-bottom: 0; }
+
+    .fibra-plaque sup {
+      vertical-align: 0.02em;
+      line-height: 1;
+      font-size: 1em;
+    }
+
+    .fibra-fn {
+      color: var(--green-700);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1em;
+      line-height: 1;
+      vertical-align: baseline;
+    }
+
+    .fibra-fn:hover { text-decoration: underline; }
+
+    .fibra-ref {
+      margin: 0;
+      padding: 0 4px 0 6px;
+      font-size: clamp(0.58rem, 1.7cqw, 0.68rem);
+      color: #5f6f66;
+      line-height: 1.45;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .fibra-ref-mark {
+      font-weight: 700;
+      color: var(--green-700);
+    }
 
     .fibra-banner {
       display: flex;
@@ -401,15 +458,64 @@
       margin: 8px 0 14px;
     }
 
+    .fibra-tail {
+      container-type: inline-size;
+      container-name: fibra-tail;
+    }
+
     footer.note {
       text-align: center;
-      font-size: 0.86rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
       color: #3d5248;
       margin-top: 10px;
       padding: 12px 14px;
       border-radius: var(--radius);
       background: rgba(255, 255, 255, 0.88);
       border: 1px solid rgba(45, 106, 79, 0.1);
+    }
+
+    .bad-disclaimer {
+      width: 100%;
+      margin: 10px 0 0;
+      padding: 0.45em 0;
+      box-sizing: border-box;
+      font-size: clamp(1.15rem, 6.2cqw, 2rem);
+      font-weight: 300;
+      font-stretch: semi-condensed;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #9aada3;
+      background: transparent;
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .company-footer {
+      width: 100vw;
+      max-width: 100vw;
+      margin: 6px calc(50% - 50vw) 0;
+      padding: 0 20px 8px;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: clamp(0.58rem, 1.9cqw, 0.72rem);
+      font-weight: 500;
+      color: #5f6f66;
+      line-height: 1.45;
+    }
+
+    .memo-code {
+      width: 100vw;
+      max-width: 100vw;
+      margin: 0 calc(50% - 50vw) 0;
+      padding: 0 20px 18px;
+      box-sizing: border-box;
+      text-align: right;
+      font-size: clamp(0.52rem, 1.55cqw, 0.64rem);
+      font-weight: 400;
+      color: #5f6f66;
+      line-height: 1.3;
     }
 
     /* Печать/PDF: не сбрасываем фон страницы и карточек — иначе расходится с экраном.
@@ -422,7 +528,10 @@
       .fibra-hero,
       .fibra-plaque,
       .fibra-banner,
-      footer.note {
+      footer.note,
+      .bad-disclaimer,
+      .company-footer,
+      .memo-code {
         break-inside: avoid;
       }
     }
@@ -515,64 +624,84 @@
 
     <section class="block">
       <p>
-        Эти состояния не всегда возникают сразу, но со временем они могут начать влиять на ваше самочувствие и на то, насколько комфортно вы переносите диету.
+        Некоторые частично растворимые пищевые волокна могут снижать всасывание лекарственных препаратов, витаминов и микроэлементов, так как образуют гель и препятствуют всасыванию других веществ при одновременном приеме.
+      </p>
+      <p>
+        Фибраксин не образует гель и не имеет противопоказаний для одновременного приема с лекарственными препаратами, витаминами и микроэлементами.
       </p>
     </section>
 
-    <section class="fibra-section" aria-label="Фибраксин">
-      <div class="fibra-hero">
-        <div class="fibra-img-wrap">
-          <img src="упаковка.webp" alt="Упаковка Фибраксин" width="280" />
+    <div class="fibra-tail">
+      <section class="fibra-section" aria-label="Фибраксин">
+        <div class="fibra-hero">
+          <div class="fibra-img-wrap">
+            <img src="упаковка.webp" alt="Упаковка Фибраксин" width="280" />
+          </div>
+          <div class="fibra-hero-text">
+            <p class="fibra-intro">Фибраксин содержит синергично действующие компоненты:</p>
+            <div class="fibra-accent-row">
+              <div class="fibra-accent-bar" aria-hidden="true"></div>
+              <ul class="fibra-accent-list">
+                <li>растворимое пищевое волокно – арабиногалактан</li>
+                <li>железосодержащий белок – лактоферрин.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="fibra-sgr">СГР № AM.01.06.01.003.R.000193.09.22 от 13.09.2022 г.</p>
         </div>
-        <div class="fibra-hero-text">
-          <p class="fibra-intro">Фибраксин содержит синергично действующие компоненты:</p>
-          <div class="fibra-accent-row">
-            <div class="fibra-accent-bar" aria-hidden="true"></div>
-            <ul class="fibra-accent-list">
-              <li>растворимое пищевое волокно – арабиногалактан</li>
-              <li>железосодержащий белок – лактоферрин.</li>
-            </ul>
+
+        <div class="fibra-plaques">
+          <article class="fibra-plaque fibra-plaque--ag">
+            <h2>Арабиногалактан — ценное натуральное растительное волокно из коры лиственницы</h2>
+            <p>
+              Оказывает регулирующее действие на кишечную моторику, служит питательной средой для полезной кишечной микрофлоры и влияет на продукцию короткоцепочечных жирных кислот.<sup><a href="#fibra-ref-1" class="fibra-fn" aria-label="Ссылка на источник">*</a></sup>
+            </p>
+            <p>
+              Способствует поддержанию нормальной функции кишечника и регуляции стула, а также оказывает поддержку при снижении веса и регуляции аппетита.<sup><a href="#fibra-ref-1" class="fibra-fn" aria-label="Ссылка на источник">*</a></sup>
+            </p>
+          </article>
+          <article class="fibra-plaque fibra-plaque--lf">
+            <h2>Лактоферрин — действует однонаправленно с арабиногалактаном и усиливает его эффекты.</h2>
+            <p>
+              Участвует в регуляции обмена железа и помогает улучшать его усвоение в условиях, когда поступление железа с пищей снижено или затруднено.
+            </p>
+            <p>
+              Способствует защите от вирусов и болезнетворных микроорганизмов, поддержанию иммунитета.
+            </p>
+          </article>
+          <p class="fibra-ref" id="fibra-ref-1">
+            <span class="fibra-ref-mark" aria-hidden="true">* </span>Бакулина Н.В., Бакулин И.Г., Захаренко С.М. и др. Управление кишечной микробиотой как адъювантная стратегия вес-редуцирующей терапии, включая агонисты рецепторов глюкагоноподобного пептида 1 и глюкозозависимого инсулинотропного полипептида: роль арабиногалактана и лактоферрина. Эффективная фармакотерапия. 2026; 22 (4): 58–66.
+          </p>
+        </div>
+
+        <div class="fibra-banner">
+          <span class="fibra-check" aria-hidden="true">✓</span>
+          <div class="fibra-banner-text">
+            <p>
+              Такое сочетание компонентов позволяет одновременно восполнить дефицит пищевых волокон и поддержать обмен железа, что делает снижение веса более комфортным.
+            </p>
+            <p>
+              Даже правильно подобранный рацион может сопровождаться дефицитом отдельных питательных веществ — если поддерживать организм в этот период, диета переносится легче, а результат становится более устойчивым.
+            </p>
           </div>
         </div>
+      </section>
+
+      <footer class="note">
+        ИНФОРМАЦИЯ ДЛЯ МЕДИЦИНСКИХ И ФАРМАЦЕВТИЧЕСКИХ РАБОТНИКОВ
+      </footer>
+
+      <div class="bad-disclaimer" aria-label="Предупреждение о статусе БАД">
+        БАД.НЕ ЯВЛЯЕТСЯ ЛЕКАРСТВЕННЫМ СРЕДСТВОМ
       </div>
 
-      <div class="fibra-plaques">
-        <article class="fibra-plaque">
-          <h2>Арабиногалактан — ценное натуральное растительное волокно из коры лиственницы</h2>
-          <p>
-            Оказывает регулирующее действие на кишечную моторику, служит питательной средой для полезной кишечной микрофлоры и влияет на продукцию короткоцепочечных жирных кислот.
-          </p>
-          <p>
-            Способствует поддержанию нормальной функции кишечника и регуляции стула, а также оказывает поддержку при снижении веса и регуляции аппетита.
-          </p>
-        </article>
-        <article class="fibra-plaque">
-          <h2>Лактоферрин — действует однонаправленно с арабиногалактаном и усиливает его эффекты.</h2>
-          <p>
-            Участвует в регуляции обмена железа и помогает улучшать его усвоение в условиях, когда поступление железа с пищей снижено или затруднено.
-          </p>
-          <p>
-            Способствует защите от вирусов и болезнетворных микроорганизмов, поддержанию иммунитета.
-          </p>
-        </article>
+      <div class="company-footer">
+        ООО «Альфасигма Рус». Реклама<br />
+        115054, г. Москва, Павелецкая площадь, д.2, стр.2., +7 (495) 150-01-23, info.ru@alfasigma.com
       </div>
 
-      <div class="fibra-banner">
-        <span class="fibra-check" aria-hidden="true">✓</span>
-        <div class="fibra-banner-text">
-          <p>
-            Такое сочетание компонентов позволяет одновременно восполнить дефицит пищевых волокон и поддержать обмен железа, что делает снижение веса более комфортным.
-          </p>
-          <p>
-            Даже правильно подобранный рацион может сопровождаться дефицитом отдельных нутриентов — если поддерживать организм в этот период, диета переносится легче, а результат становится более устойчивым.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="note">
-      Материал носит информационный характер и не заменяет консультацию специалиста.
-    </footer>
+      <div class="memo-code">АС-РУС-ФБС-69 (06-2026)</div>
+    </div>
   </div>
 </body>
 </html>
